@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:300');
+
+$color-light: #f5f8fa;
+$color-blue: #106ba3;
+$color-dark: #555;
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    color: $color-dark;
+    font-size: 13px;
+}
+
+body > .ember-view {
+    height: 100%;
+}
+
+.btn {
+    display: inline-block;
+    line-height: 24px;
+    border-radius: 4px;
+    color: $color-dark;
+    background: #f1f1f1;
+    background-image: linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0));
+    border: 1px solid #ccc;
+    font-weight: bold;
+}
+
+.leaflet-container{
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.controls-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.sidebar {
+    pointer-events: all;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 325px;
+    background: $color-light;
+    box-shadow: 5px 0px 12px 0px rgba(0,0,0,0.15);
+
+}
+
+.app-name {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 0.0250em;
+    color: $color-dark;
+    margin: 0.5em 16px;
+    padding: 0 12px;
+    span {
+        text-transform: uppercase;
+        font-size: 12px;
+        margin-left: 0.66em;
+    }
+}
+
+.catalog-url-input {
+    font-size: 12px;
+    padding: 0.75em 1em;
+    border: none;
+    height: 36px;
+}
+
+label.input-label {
+    display: inline-block;
+    color: darken($color-blue, 10%);
+    margin: 6px 12px;
+    font-size: 12px;
+}
+
+.text-field {
+    margin: 6px 12px 8px;
+    font-size: 12px;
+}
+
+label.text-label {
+    display: block;
+    color: $color-dark;
+    font-weight: bold;
+    margin: 6px 12px 4px;
+    font-size: 12px;
+    & + .text-field {
+        margin-top: 0px;
+    }
+}
+
+.text-group {
+    border-left: 2px solid $color-blue;
+    margin-left: 8px;
+    margin-bottom: 16px;
+}
+
+.text-group-controls {
+    margin: 12px;
+}
+
+label.group-label {
+    display: block;
+    margin: 6px 12px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+.input-group {
+    $button-size: 30px;
+    display: flex;
+    flex-direction: row;
+    margin: 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    align-items: stretch;
+    box-shadow: 0 1px 1px rgba(16,22,26,.2) inset;
+    background: #fff;
+    position: relative;
+    input {
+        flex: 1;
+        border: none;
+        background: none;
+        padding-right: $button-size + 4;
+    }
+    button {
+        position: absolute;
+        right: 4px;
+        align-self: center;
+        border: none;
+        color: $color-dark;
+        font-size: 12px;
+        border-radius: 4px;
+        width: $button-size;
+        height: $button-size;
+        text-align: center;
+        background: rgba(#fff, 0.9);
+        cursor: pointer;
+        &:hover {
+            background: #f1f1f1;
+        }
+    }
+}
+
+.catalog-name-input {
+    margin-bottom: 12px;
+}
+
+.catalog-name {
+    text-align: center;
+    margin: 12px;
+    span {
+        font-weight: bold;
+    }
+}
+
+.catalog-url-input.readonly {
+    font-weight: bold;
+}
+
+.tab-group {
+    display: flex;
+    margin: 0 4px;
+    font-size: 12px;
+    margin-bottom: -1px;
+    z-index: 50;
+    .tab {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 6px 8px;
+        border-color: rgba(0,0,0,0);
+        border-bottom: 1px solid #c1c1c1;
+        border-width: 1px;
+        border-top-width: 3px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border-style: solid;
+        font-weight: bold;
+        color: $color-dark;
+        cursor: pointer;
+        span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+            font-weight: normal;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 16px;
+            background: #dadada;
+        }
+        &.active, &.is-active {
+            color: $color-dark;
+            border-style: solid;
+            border-color: $color-blue #c1c1c1 $color-light;
+        }
+    }
+}
+
+
+.tab-panel {
+    flex: 1;
+    overflow-y: auto;
+    border-top: 1px solid #c1c1c1;
+    padding-top: 8px;
+    .panel-title {
+        margin: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        color: $color-dark;
+        text-decoration: none;
+        a {
+            color: $color-blue;
+            text-decoration: inherit;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.card {
+    background: #fff;
+    padding: 6px;
+    margin: 12px 12px 0px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.15);
+}
+
+.stac-item {
+    @extend .card;
+    div.thumbnail {
+        max-width: 100%;
+        height: 65px;
+        background-size: cover;
+        background-position-y: 50%;
+    }
+}
+
+.callout {
+    padding: 8px;
+    margin: 12px;
+    background: #dfdfdf;
+    border-radius: 4px;
+    text-align: center;
+
+}

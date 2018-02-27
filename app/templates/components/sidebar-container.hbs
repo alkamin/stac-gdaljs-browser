@@ -1,0 +1,87 @@
+<div class="app-name">STAC Browser</div>
+
+{{catalog-name-input catalogUrl=catalogUrl onChange=(action "fetchCatalog")}}
+
+{{#if catalogService.isLoading}}
+    <div class="callout">
+        Loading
+    </div>
+{{else}}
+    {{#if catalogService.currentCatalog}}
+        <div class="tab-group">
+            {{#tab-item tag="info" activeTag=uiStateService.activeList onClick=(action "toggleList")}}
+                Info
+            {{/tab-item}}
+            {{#tab-item tag="catalogs" activeTag=uiStateService.activeList onClick=(action "toggleList")}}
+                Catalogs<span>{{catalogService.currentSubCatalogs.length}}</span>
+            {{/tab-item}}
+            {{#tab-item tag="items" activeTag=uiStateService.activeList onClick=(action "toggleList")}}
+                Items<span>{{catalogService.currentItems.length}}</span>
+            {{/tab-item}}
+        </div>
+        <div class="tab-panel">
+            {{#if (eq uiStateService.activeList 'info')}}
+                <div class="panel-title">
+                    {{#if catalogService.currentCatalog.homepage}}
+                        <a href={{catalogService.currentCatalog.homepage}} target="_blank">{{catalogService.currentCatalog.name}}</a>
+                    {{else}}
+                        {{catalogService.currentCatalog.name}}
+                    {{/if}}
+                </div>
+                <div class="text-group">
+                    <label class="text-label">Description</label>
+                    <div class="text-field">
+                        {{catalogService.currentCatalog.description}}
+                    </div>
+                </div>
+                <div class="text-group">
+                    <label class="text-label">License</label>
+                    <div class="text-field">
+                        <a href={{catalogService.currentCatalog.license.link}}>{{catalogService.currentCatalog.license.name}}</a>
+                    </div>
+                    <label class="text-label">Copyright</label>
+                    <div class="text-field">
+                        {{catalogService.currentCatalog.license.copyright}}
+                    </div>
+                </div>
+                <div class="text-group">
+                    <label class="group-label">Contact Info</label>
+                    <label class="text-label">Name</label>
+                    <div class="text-field">
+                        {{catalogService.currentCatalog.contact.name}}
+                    </div>
+                    <label class="text-label">Organization</label>
+                    <div class="text-field">
+                        {{catalogService.currentCatalog.contact.organization}}
+                    </div>
+                    <label class="text-label">Email</label>
+                    <div class="text-field">
+                        {{catalogService.currentCatalog.contact.email}}
+                    </div>
+                    <label class="text-label">Web</label>
+                    <div class="text-field">
+                        {{catalogService.currentCatalog.contact.url}}
+                    </div>
+                </div>
+            {{/if}}
+            {{#if (eq uiStateService.activeList 'catalogs')}}
+                {{#each catalogService.currentSubCatalogs as |item|}}
+                    {{stac-subcatalog item=item onSelect=(action "setCatalog")}}
+                {{else}}
+                    <div class="callout">
+                        No STAC sub-catalogs found
+                    </div>
+                {{/each}}
+            {{/if}}
+            {{#if (eq uiStateService.activeList 'items')}}
+                {{#each catalogService.currentItems as |item|}}
+                    {{stac-item item=item}}
+                {{else}}
+                    <div class="callout">
+                        No STAC items found
+                    </div>
+                {{/each}}
+            {{/if}}
+        </div>
+    {{/if}}
+{{/if}}

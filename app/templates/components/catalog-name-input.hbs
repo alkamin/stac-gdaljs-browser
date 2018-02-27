@@ -1,0 +1,10 @@
+<label class="input-label">Current Catalog</label>
+{{#if isShowingName}}
+    <div class="input-group">
+        {{input class="catalog-url-input readonly" value=catalogService.currentCatalog.name placeholder="URL of a STAC .json" click=(action "toggleShowingInput") readonly="readonly"}}
+    </div>
+{{else}}
+    <div class="input-group">
+        {{input id="catalog-url-input" class="catalog-url-input" value=catalogUrl placeholder="URL of a STAC .json" key-press="fetchCatalog" focusOut=(action "toggleShowingInput")}}<button>S</button>
+    </div>
+{{/if}}

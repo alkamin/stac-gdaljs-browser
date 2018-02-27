@@ -1,0 +1,9 @@
+<div class="ember-view">
+  {{#leaflet-map lat=24 lng=-45 zoom=3 zoomControl=false attributionControl=false}}
+      {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+  {{/leaflet-map}}
+
+  {{#controls-container}}
+      {{sidebar-container catalogUrl=catalog}}
+  {{/controls-container}}
+</div>
